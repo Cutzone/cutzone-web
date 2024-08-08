@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Cutzone",
   description: "Onde seu próximo corte está à distância de um toque.",
-  image: "/cutzone.png",
+  image: "/cutzone.png"
 };
 
 export default function RootLayout({
