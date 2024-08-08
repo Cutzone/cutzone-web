@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Cutzone",
   description: "Onde seu próximo corte está à distância de um toque.",
-  image: 
+  image:
     "https://firebasestorage.googleapis.com/v0/b/cutzone-a95f2.appspot.com/o/cutzone.png?alt=media&token=9845f7dd-a2ae-42b0-9632-a82593f02a27"
 };
 
