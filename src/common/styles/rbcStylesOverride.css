@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+.rbc-calendar {
+    font-family: 'Poppins', sans-serif;
+    color: #b7864b;
+}
+
+.rbc-month-view {
+  border-left: none;
+  border-right: none;
+}
+
+.rbc-time-view {
+  border-left: none;
+  border-right: none;
+}
+
+.rbc-overflowing, .rbc-time-header {
+  border-right: none;
+}
+
+.rbc-show-more{
+  color: #b7864b;
+}
+
+.rbc-event {
+  opacity: 1;
+}
+
+.rbc-button-link {
+  color: #b7864b;
+  font-weight: 700;
+}
+
+.rbc-month-row + .rbc-month-row{
+  border-top: 2px solid #D0C8C5;
+}
+
+/* .rbc-time-content > * + * > *{
+  border-left: none;
+} */
+
+.rbc-label{
+  color: #b7864b;
+}
+
+.rbc-day-bg{
+  display: none;
+}
+
+.rbc-day-slot .rbc-time-slot{
+  border-top: none;
+}
+
+/* .rbc-timeslot-group {
+  display: flex;
+  height: 1000px;comom
+} */
+
+.rbc-time-view .rbc-event {
+  width: calc(100% / 3);  /* Onde n é o número máximo de eventos que você espera ter ao mesmo tempo. */
+  display: inline-block;
+}
+
+.rbc-time-content {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+.rbc-allday-cell{
+  display: none;
+}
+
+.rbc-time-content {
+  border-top: 1px solid #f7f7f7
+}
+
+.rbc-time-slot {
+  height: 500px !important;
+}
