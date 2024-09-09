@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +10,15 @@ import { CloseOutlined } from "@ant-design/icons";
 import Button from "@/components/atoms/Button/button";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateAppointmentStatus } from "@/store/services/appointments";
+import {
+  updateAppointmentStatus,
+  getAppointmentByClientId,
+  updateClientAppointment,
+  updateClientAppointmentStatus
+} from "@/store/services/appointments";
 import { updateUserAppointmentStatus } from "@/store/services/user";
+import { isEqual } from "date-fns";
+import { increment } from "firebase/firestore";
 
 interface ModalProps {
   isDialogOpen: boolean;
@@ -23,6 +30,8 @@ interface StatusModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   type: "confirm" | "cancel" | "didNotShow";
+  appointmentId: string;
+  bsid: string;
   selectedEvent: any;
 }
 
@@ -30,6 +39,8 @@ const StatusModal = ({
   isOpen,
   setIsOpen,
   type,
+  appointmentId,
+  bsid,
   selectedEvent
 }: StatusModalProps) => {
   const queryClient = useQueryClient();
@@ -59,24 +70,40 @@ const StatusModal = ({
   );
 
   const mutationCancel = useMutation(
-    () => {
-      updateUserAppointmentStatus({
-        companyId: selectedEvent.bsid,
-        serviceId: selectedEvent.serviceId,
-        userId: selectedEvent.clientId,
-        employeeId: selectedEvent.employeeId,
-        startTime: selectedEvent.start,
-        status: "canceled"
-      });
-      return updateAppointmentStatus({
-        id: selectedEvent.id,
+    async () => {
+      const res = await getAppointmentByClientId(selectedEvent);
+
+      const categoryService = selectedEvent?.service?.category[0];
+      const clientId = selectedEvent?.clientId;
+      const clientAppointmentId = res?.id;
+
+      let field;
+
+      if (categoryService === "sobrancelha") {
+        field = {
+          sobrancelhaCredit: increment(1)
+        };
+      } else if (categoryService === "barba") {
+        field = {
+          barbaCredit: increment(1)
+        };
+      } else if (categoryService === "corte") {
+        field = {
+          corteCredit: increment(1)
+        };
+      }
+
+      await updateClientAppointment(clientId, clientAppointmentId ?? "", field);
+
+      await updateAppointmentStatus({
+        id: appointmentId,
         status: "canceled",
         bsid: selectedEvent.bsid
       });
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["appointments"]);
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(["appointments"]);
         setIsOpen(false);
       }
     }
@@ -90,7 +117,7 @@ const StatusModal = ({
         userId: selectedEvent.clientId,
         employeeId: selectedEvent.employeeId,
         startTime: selectedEvent.start,
-        status: "didNotShow"
+        status: "canceled"
       });
       return updateAppointmentStatus({
         id: selectedEvent.id,
@@ -99,8 +126,8 @@ const StatusModal = ({
       });
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["appointments"]);
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(["appointments"]);
         setIsOpen(false);
       }
     }
@@ -282,18 +309,24 @@ const Modal = ({
         isOpen={isCancelOpen}
         setIsOpen={setIsCancelOpen}
         type="cancel"
+        appointmentId={selectedEvent?.id}
+        bsid={selectedEvent?.bsid}
         selectedEvent={selectedEvent}
       />
       <StatusModal
         isOpen={isConfirmationOpen}
         setIsOpen={setIsConfirmationOpen}
         type="confirm"
+        appointmentId={selectedEvent?.id}
+        bsid={selectedEvent?.bsid}
         selectedEvent={selectedEvent}
       />
       <StatusModal
         isOpen={isAbsenceOpen}
         setIsOpen={setIsAbsenceOpen}
         type="didNotShow"
+        appointmentId={selectedEvent?.id}
+        bsid={selectedEvent?.bsid}
         selectedEvent={selectedEvent}
       />
     </>

@@ -11,9 +11,6 @@ import { storageGet } from "@/store/services/storage";
 import useBarberShop from "@/hooks/queries/useBarberShop";
 import { useRouter } from "next/navigation";
 import useAllAppointments from "@/hooks/queries/useAllAppointments";
-import { getCollaboratorDoc } from "@/store/services/collaborators";
-import { getServiceDoc } from "@/store/services/services";
-import { useQuery } from "@tanstack/react-query";
 import { dateToShortString } from "@/utils/dateToString";
 import moment from "moment";
 import { Timestamp } from "@/common/entities/timestamp";
@@ -55,6 +52,8 @@ export default function Agenda() {
                 appointments[a].startTime as unknown as Timestamp
               )
             ).toDate(),
+            collaboratorId: appointments[a].idEmployee,
+            service: appointments[a].service,
             end: moment(
               dateToShortString(appointments[a].endTime as unknown as Timestamp)
             ).toDate(),

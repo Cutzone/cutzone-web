@@ -361,3 +361,85 @@ export const cancelAppointmentsCollaborators = async ({
     return { error: error.message };
   }
 };
+
+export const getAppointmentByClientId = async (selectedEvent: any) => {
+  try {
+    const usersRef = doc(db, "users", selectedEvent.clientId);
+    const appointmentsRef = collection(usersRef, tableName);
+
+    const querySnapshot = await getDocs(appointmentsRef);
+
+    const appointments = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      startTime: doc.data().startTime.toDate(),
+      endTime: doc.data().endTime.toDate(),
+      id: doc.id
+    })) as {
+      endTime: Date;
+      id: string;
+      startTime: Date;
+      status: string;
+      idCompany: string;
+      idEmployee: string;
+      idService: string;
+    }[];
+
+    const appointment = appointments.find(
+      (item) =>
+        isEqual(item?.startTime, selectedEvent?.start) &&
+        isEqual(item?.endTime, selectedEvent?.end) &&
+        item.idEmployee === selectedEvent.collaboratorId &&
+        item.status === "scheduled" &&
+        item.idCompany === selectedEvent.bsid
+    );
+
+    return appointment ?? null;
+  } catch (error: any) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updateClientAppointment = async (
+  clientId: string,
+  appointmentId: string,
+  fields: any
+) => {
+  try {
+    const usersRef = doc(db, "users", clientId);
+    const appointmentsRef = doc(usersRef, "appointments", appointmentId);
+
+    await updateDoc(usersRef, {
+      ...fields
+    });
+
+    await updateDoc(appointmentsRef, {
+      status: "canceled"
+    });
+
+    return true;
+  } catch (error: any) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updateClientAppointmentStatus = async (
+  clientId: string,
+  appointmentId: string,
+  status: string
+) => {
+  try {
+    const usersRef = doc(db, "users", clientId);
+    const appointmentsRef = doc(usersRef, "appointments", appointmentId);
+
+    await updateDoc(appointmentsRef, {
+      status
+    });
+
+    return true;
+  } catch (error: any) {
+    console.log(error);
+    return null;
+  }
+};
