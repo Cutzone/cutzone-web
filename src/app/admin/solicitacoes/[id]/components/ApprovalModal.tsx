@@ -34,7 +34,7 @@ const ApprovalModal = ({
 }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const [tierValue, setTierValue] = useState<string>("STANDARD");
+  const [tierValue, setTierValue] = useState<string>("BASIC");
   const [checkboxValue, setCheckboxValue] = useState<string>("");
 
   const mutation = useMutation(
