@@ -64,7 +64,7 @@ const CollaboratorModal = ({
             name: "",
             age: "" as unknown as number,
             email: "",
-            pix: "" as unknown as number,
+            pix: "" as unknown as string,
             profession: ""
           }
   });

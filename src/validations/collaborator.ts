@@ -16,7 +16,7 @@ export default z.object({
   email,
   pix: z
     .string({
-      required_error: "Insira sua chave PIX",
+      required_error: "Insira sua chave PIX"
     })
     .min(1, "Insira um CPF ou número válido"),
   profession: z.string({}).nonempty("Insira sua profissão")
