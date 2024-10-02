@@ -94,7 +94,7 @@ const ApprovalModal = ({
           <SelectContent className="rounded bg-gray-50">
             <SelectGroup>
               <SelectLabel>Tier</SelectLabel>
-              <SelectItem value="BASISC">Cria</SelectItem>
+              <SelectItem value="BASIC">Cria</SelectItem>
               <SelectItem value="STANDARD">Chavoso</SelectItem>
               <SelectItem value="PREMIUM">Jogador</SelectItem>
             </SelectGroup>
