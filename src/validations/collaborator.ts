@@ -14,10 +14,9 @@ export default z.object({
     .min(12, "Insira uma idade válida")
     .max(200, "Insira uma idade válida"),
   email,
-  pix: z.coerce
-    .number({
-      required_error: "Insira seu CPF ou número",
-      invalid_type_error: "Insira um valor numérico"
+  pix: z
+    .string({
+      required_error: "Insira sua chave PIX",
     })
     .min(1, "Insira um CPF ou número válido"),
   profession: z.string({}).nonempty("Insira sua profissão")

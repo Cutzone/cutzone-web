@@ -3,7 +3,7 @@ export interface CollaboratorEntity {
   name: string;
   photo: string;
   email: string;
-  pix: number;
+  pix: string;
   profession: string;
   age: number;
   // performance: number;
