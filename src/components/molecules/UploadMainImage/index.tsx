@@ -1,16 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { deleteImage, uploadFile } from "@/store/services/uploadFile";
 import { useEffect, useState } from "react";
 import { Progress } from "antd";
 import Image from "next/image";
-import { EditOutlined, UserOutlined } from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
 import FormErrorLabel from "@/components/atoms/FormError/formError";
 import { UploadMainImageProps } from "./types";
 
 export default function UploadMainImage({
   downloadURL,
   setDownloadURL,
-  formRegister,
-  formErrors,
   mainImageError,
   setMainImageError,
   size,
@@ -78,8 +77,8 @@ export default function UploadMainImage({
                 size === "large"
                   ? "bottom-2 right-2 h-8 w-8"
                   : rounded
-                  ? "bottom-1 right-1 h-6 w-6"
-                  : "bottom-[-5px] right-[-5px] h-6 w-6"
+                    ? "bottom-1 right-1 h-6 w-6"
+                    : "bottom-[-5px] right-[-5px] h-6 w-6"
               } items-center justify-center rounded-full bg-primary-amber`}
             >
               <EditOutlined className="text-white" />
@@ -106,8 +105,8 @@ export default function UploadMainImage({
                 size === "large"
                   ? "bottom-2 right-2 h-8 w-8"
                   : rounded
-                  ? "bottom-1 right-1 h-6 w-6"
-                  : "bottom-[-5px] right-[-5px] h-6 w-6"
+                    ? "bottom-1 right-1 h-6 w-6"
+                    : "bottom-[-5px] right-[-5px] h-6 w-6"
               } flex items-center justify-center rounded-full bg-primary-amber group-hover:opacity-95`}
             >
               <EditOutlined className="text-white" />

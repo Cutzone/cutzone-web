@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import { months } from "./constants";
 import { View } from "react-big-calendar";
 import { startOfWeek, endOfWeek, format } from "date-fns";
@@ -12,7 +13,6 @@ import {
 import Image from "next/image";
 import LoadingComponent from "@/components/atoms/Loading/loading";
 import { RefreshCcw } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 interface ToolbarProps {
   view: View;

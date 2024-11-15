@@ -61,8 +61,6 @@ function Colaboradores() {
     handleSubmit,
     register,
     formState: { errors },
-    setValue,
-    getValues,
     reset
   } = useForm<collaboratorForm>({
     mode: "all",

@@ -5,7 +5,7 @@ const PdfViewer = ({ alt, src, pageCount }: PdfViewerProps) => {
   return (
     <div className="my-28 flex flex-col items-center gap-4">
       {Array.from({ length: pageCount }).map((_, index) => {
-        if (index === 0) return <div></div>;
+        if (index === 0) return <div key={index}></div>;
 
         return (
           <div

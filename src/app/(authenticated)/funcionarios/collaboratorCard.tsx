@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  CloseOutlined,
-  EllipsisOutlined,
-  StarFilled,
-  UserOutlined
-} from "@ant-design/icons";
+import { EllipsisOutlined, StarFilled } from "@ant-design/icons";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -13,26 +8,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import collaboratorFormSchema from "@/validations/collaborator";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/components/atoms/Input/input";
-import Button from "@/components/atoms/Button/button";
 import { CollaboratorEntity } from "@/common/entities/collaborator";
-import UploadMainImage from "@/components/molecules/UploadMainImage";
-import {
-  deleteCollaboratorDoc,
-  updateCollaboratorDoc
-} from "@/store/services/collaborators";
+import { deleteCollaboratorDoc } from "@/store/services/collaborators";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { storageGet } from "@/store/services/storage";
-import { BarberServicesEntity } from "@/common/entities/barberServicesEntity";
-import { set } from "date-fns";
 import DeleteModal from "@/components/atoms/DeleteModal";
 import CollaboratorModal from "./collaboratorModal";
 
-type collaboratorForm = z.infer<typeof collaboratorFormSchema>;
 interface CollaboratorCardProps {
   collaborator: CollaboratorEntity;
 }
@@ -40,28 +22,8 @@ interface CollaboratorCardProps {
 const CollaboratorCard = ({ collaborator }: CollaboratorCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [downloadURL, setDownloadURL] = useState(collaborator.photo);
-  const [mainImageError, setMainImageError] = useState("");
+  const [downloadURL] = useState(collaborator.photo);
   const queryClient = useQueryClient();
-
-  const mutation = useMutation(
-    (formData: collaboratorForm) => {
-      return updateCollaboratorDoc(
-        { ...formData, photo: downloadURL },
-        collaborator.id as string,
-        storageGet("uid") as string
-      );
-    },
-    {
-      onSuccess: async () => {
-        await queryClient.invalidateQueries([
-          "collaborators",
-          storageGet("uid") as string
-        ]);
-        setIsDialogOpen(false);
-      }
-    }
-  );
 
   const mutationDelete = useMutation(
     () => {
@@ -80,27 +42,6 @@ const CollaboratorCard = ({ collaborator }: CollaboratorCardProps) => {
       }
     }
   );
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors }
-  } = useForm<collaboratorForm>({
-    mode: "all",
-    criteriaMode: "all",
-    resolver: zodResolver(collaboratorFormSchema),
-    values: {
-      name: collaborator.name,
-      age: collaborator.age,
-      email: collaborator.email,
-      pix: collaborator.pix,
-      profession: collaborator.profession
-    }
-  });
-
-  const handleFormSubmit = async (data: collaboratorForm) => {
-    await mutation.mutateAsync(data);
-  };
 
   const deleteCollaborator = async () => {
     await mutationDelete.mutateAsync();

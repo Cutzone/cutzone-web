@@ -1,5 +1,4 @@
 import { PlanEntity } from "@/common/entities/plan";
-import { ProductEntity } from "@/common/entities/product";
 
 export interface PaymentContextType {
   getCheckoutUrl: (priceId: string) => Promise<string>;

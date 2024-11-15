@@ -15,13 +15,11 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import FormErrorLabel from "@/components/atoms/FormError/formError";
 import ReactInputMask from "react-input-mask";
 import { storageGet } from "@/store/services/storage";
-import { usePathname } from "next/navigation";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 
 type signUpForm = z.infer<typeof signUpFormSchema>;
 
 export default function CadastroPage() {
-  const [cep, setCep] = useState("");
   const [enableSearch, setEnableSearch] = useState(false);
   const [checked, setChecked] = useState(false);
   const fetchAddressByCEP = async (cep: string) => {
@@ -69,7 +67,6 @@ export default function CadastroPage() {
     }
   );
 
-  const currentPath = usePathname();
   const [showPassword, setShowPassword] = useState(false);
 
   const hasPasswordError = errors.password?.message;

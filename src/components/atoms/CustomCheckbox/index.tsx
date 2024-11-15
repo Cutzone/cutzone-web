@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React from "react";
 
 interface CustomCheckboxProps {
   checked: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: any;
   label: string;
   type?: string;

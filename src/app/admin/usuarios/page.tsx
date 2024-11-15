@@ -4,8 +4,6 @@ import useAllUsers from "@/hooks/queries/useAllUsers";
 import { columns } from "./columns";
 import AdminInfoPage from "@/components/organisms/AdminInfoPage";
 import { twMerge } from "tailwind-merge";
-import { useEffect, useState } from "react";
-import { usersByPlan } from "@/store/services/user";
 import useUsersByPlan from "@/hooks/queries/useUsersByPlan";
 
 const Card = ({

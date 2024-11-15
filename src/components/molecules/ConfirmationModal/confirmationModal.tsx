@@ -1,5 +1,4 @@
-import { Title } from "@radix-ui/react-dialog";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from "@/components/atoms/Button/button";
 import {
   Dialog,

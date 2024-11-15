@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { twMerge } from "tailwind-merge";
 import { SubTitleProps } from "./types";
 

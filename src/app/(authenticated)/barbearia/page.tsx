@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import useBarberShop from "@/hooks/queries/useBarberShop";
@@ -15,7 +16,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import myBarberShopFormSchema from "@/validations/myBarberShop";
-import { deleteImage, uploadFile } from "@/store/services/uploadFile";
+import { uploadFile } from "@/store/services/uploadFile";
 import DayCheckbox from "@/components/atoms/DayCheckbox";
 import CustomCheckbox from "@/components/atoms/CustomCheckbox";
 import Title from "@/components/atoms/Title";
@@ -23,6 +24,8 @@ import dayjs from "dayjs";
 import { updateMyBarberShopInfo } from "@/store/services/barberShop";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { successToast } from "@/hooks/useAppToast";
+import Input from "@/components/atoms/Input/input";
+import { FinanceForm, financeFormSchema } from "@/validations/financesForm";
 
 const weekDays = [
   { name: "segunda", label: "Seg" },
@@ -71,6 +74,24 @@ function Barbearia() {
     criteriaMode: "all",
     resolver: zodResolver(myBarberShopFormSchema)
   });
+
+  const {
+    register: registerFinance,
+    formState: { isValid, errors: financeErrors },
+    getValues,
+    trigger
+  } = useForm<FinanceForm>({
+    mode: "all",
+    criteriaMode: "all",
+    resolver: zodResolver(financeFormSchema),
+    values: {
+      bank: data?.bank || "",
+      bankAccount: String(data?.bankAccount) || "",
+      bankAgency: String(data?.bankAgency) || "",
+      pix: data?.pix || ""
+    }
+  });
+
   const onChangeCancelTime = (value: number | null) => {
     setCancelTimeError("");
     setCancelTime(value as number);
@@ -117,7 +138,11 @@ function Barbearia() {
         lunchBreakIntervalStart: lunchTime[0],
         lunchBreakIntervalEnd: lunchTime[1],
         cancelTime,
-        maxAppointmentTime: maxDays
+        maxAppointmentTime: maxDays,
+        bank: getValues("bank"),
+        bankAccount: Number(getValues("bankAccount")),
+        bankAgency: Number(getValues("bankAgency")),
+        pix: getValues("pix")
       });
     },
     {
@@ -167,6 +192,14 @@ function Barbearia() {
       setMaxDaysError(
         "O tempo máximo de agendamento deve ser entre 1 e 30 dias"
       );
+      return;
+    }
+
+    if (!isValid) {
+      trigger("bank");
+      trigger("bankAccount");
+      trigger("bankAgency");
+      trigger("pix");
       return;
     }
 
@@ -446,6 +479,52 @@ function Barbearia() {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="mt-8 flex flex-col gap-1 sm:w-1/2">
+          <h2 className="text-xl font-bold">Dados financeiros</h2>
+          <Input
+            bgColor="bg-[#fafafa]"
+            textColor="text-primary-amber"
+            borderColor="border-primary-amber"
+            label="Banco"
+            placeholder="Insira o nome"
+            name="bank"
+            formRegister={registerFinance}
+            formErrors={financeErrors}
+          />
+          <Input
+            bgColor="bg-[#fafafa]"
+            textColor="text-primary-amber"
+            borderColor="border-primary-amber"
+            label="Conta bancária"
+            placeholder="Insira o numero da conta"
+            mask="999999999999"
+            name="bankAccount"
+            formRegister={registerFinance}
+            formErrors={financeErrors}
+          />
+          <Input
+            bgColor="bg-[#fafafa]"
+            textColor="text-primary-amber"
+            borderColor="border-primary-amber"
+            label="Agência bancária"
+            placeholder="Insira o numero da agência"
+            mask="9999"
+            name="bankAgency"
+            formRegister={registerFinance}
+            formErrors={financeErrors}
+          />
+          <Input
+            bgColor="bg-[#fafafa]"
+            textColor="text-primary-amber"
+            borderColor="border-primary-amber"
+            label="Chave Pix"
+            placeholder="Insira a chave"
+            name="pix"
+            formRegister={registerFinance}
+            formErrors={financeErrors}
+          />
         </div>
 
         <div className="my-4 flex justify-end px-8">

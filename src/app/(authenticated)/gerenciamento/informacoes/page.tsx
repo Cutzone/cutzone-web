@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Separator } from "@/components/ui/separator";
@@ -35,7 +36,7 @@ export default function Informacoes() {
   const route = useRouter();
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useBarberShop(storageGet("uid") as string);
+  const { data } = useBarberShop(storageGet("uid") as string);
   const progress = data?.flags?.filter((flag) => flag === true).length;
 
   const mutation = useMutation(

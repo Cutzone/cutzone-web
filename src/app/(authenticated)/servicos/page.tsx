@@ -14,7 +14,7 @@ function Servicos() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const route = useRouter();
   const { data: barberShopData } = useBarberShop(storageGet("uid") as string);
-  const { data, isLoading } = useAllServices(storageGet("uid") as string);
+  const { data } = useAllServices(storageGet("uid") as string);
 
   useEffect(() => {
     if (barberShopData?.flags?.includes(false) || barberShopData?.suspended) {

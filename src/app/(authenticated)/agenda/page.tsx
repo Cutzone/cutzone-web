@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -25,9 +26,7 @@ export default function Agenda() {
   const route = useRouter();
   const [events, setEvents] = useState<any[]>([]);
 
-  const { data: barberData, isLoading } = useBarberShop(
-    storageGet("uid") as string
-  );
+  const { data: barberData } = useBarberShop(storageGet("uid") as string);
   const {
     data: appointments,
     isLoading: isLoadingAppointments,

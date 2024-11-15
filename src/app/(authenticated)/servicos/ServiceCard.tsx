@@ -21,7 +21,7 @@ interface ServiceCardProps {
 const ServiceCard = ({ service }: ServiceCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [downloadURL, setDownloadURL] = useState(service.photo);
+  const [downloadURL] = useState(service.photo);
   const queryClient = useQueryClient();
 
   const mutationDelete = useMutation(

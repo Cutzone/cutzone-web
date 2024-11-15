@@ -1,4 +1,4 @@
-import { CheckOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
+import { StarFilled } from "@ant-design/icons";
 import { PlanCardProps } from "./types";
 
 const PlanCard = ({

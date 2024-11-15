@@ -1,15 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from "@/components/atoms/Button/button";
 import Input from "@/components/atoms/Input/input";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from "@/components/ui/dialog";
-import useAuth from "@/hooks/useAuth";
 import { updateUser } from "@/store/services/user";
 import updateUserFormSchema from "@/validations/updateUser";
 import { zodResolver } from "@hookform/resolvers/zod";

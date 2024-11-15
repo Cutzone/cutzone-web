@@ -2,7 +2,6 @@
 
 import { PlanEntity } from "@/common/entities/plan";
 import Button from "@/components/atoms/Button/button";
-import LoadingComponent from "@/components/atoms/Loading/loading";
 import PlanCard from "@/components/atoms/PlanCard";
 import Subtitle from "@/components/atoms/Subtitle";
 import Title from "@/components/atoms/Title";
@@ -11,8 +10,6 @@ import useProfile from "@/hooks/queries/useProfile";
 import usePayment from "@/hooks/usePayment";
 import { storageGet } from "@/store/services/storage";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
-import { set } from "date-fns";
-import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -41,7 +38,7 @@ const planCardData = [
 ];
 
 const Planos = () => {
-  const [planName, setPlanName] = useState("");
+  const [, setPlanName] = useState("");
   const [selectedTier, setSelectedTier] = useState("");
   const [selectedServices, setSelectedServices] = useState<
     [number, number, number]
@@ -50,7 +47,7 @@ const Planos = () => {
   const { data } = useProfile(storageGet("uid") as string);
   const { data: products, isLoading: isLoadingProducts } = useAllProducts();
 
-  const { getPortalUrl, getCheckoutUrl, getPlanName, loading } = usePayment();
+  const { getCheckoutUrl, getPlanName, loading } = usePayment();
 
   const selectedPlan = products?.find((curr) => {
     return (
@@ -66,11 +63,6 @@ const Planos = () => {
 
     const checkoutUrl = await getCheckoutUrl(selectedPlan.priceId);
     router.push(checkoutUrl);
-  };
-
-  const redirectToManageSubscription = async () => {
-    const portalUrl = await getPortalUrl();
-    router.push(portalUrl);
   };
 
   useEffect(() => {

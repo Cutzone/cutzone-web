@@ -3,7 +3,6 @@ import Button from "@/components/atoms/Button/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle
@@ -17,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { addDays, format, set } from "date-fns";
+import { addDays, format } from "date-fns";
 import { Calendar as CalendarIcon, Square, SquareStack } from "lucide-react";
 import { DateRange } from "react-day-picker";
 import { ptBR } from "date-fns/locale";
@@ -57,8 +56,7 @@ const BlockModal = ({
   open,
   onOpenChange,
   collaborators,
-  barberShop,
-  appointments
+  barberShop
 }: BlockModalProps) => {
   const [selectedValue, setSelectedValue] = useState("barbershop");
   const [switchValue, setSwitchValue] = useState(false);
@@ -92,7 +90,7 @@ const BlockModal = ({
           "blockedDatesCollab",
           storageGet("uid") as string
         ]);
-        queryClient.invalidateQueries(["appointments"]);
+        queryClient.invalidateQueries(["appointments", barberShop.id]);
         onOpenChange(false);
       }
     }
@@ -115,7 +113,7 @@ const BlockModal = ({
           "blockedDates",
           storageGet("uid") as string
         ]);
-        queryClient.invalidateQueries(["appointments"]);
+        queryClient.invalidateQueries(["appointments", barberShop.id]);
         onOpenChange(false);
       }
     }

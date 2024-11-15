@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import firebaseApp from "@/config/firebase";
 import {
   DocumentData,
@@ -362,7 +363,11 @@ export const updateMyBarberShopInfo = async ({
   mainPhoto,
   photos,
   cancelTime,
-  maxAppointmentTime
+  maxAppointmentTime,
+  bank,
+  bankAccount,
+  bankAgency,
+  pix
 }: {
   id: string;
   workDays: boolean[];
@@ -376,6 +381,10 @@ export const updateMyBarberShopInfo = async ({
   photos: string[];
   cancelTime: number;
   maxAppointmentTime: number;
+  bank: string;
+  bankAccount: number;
+  bankAgency: number;
+  pix: string;
 }) => {
   try {
     await updateDoc(doc(db, tableName, id), {
@@ -389,7 +398,11 @@ export const updateMyBarberShopInfo = async ({
       mainPhoto,
       photos,
       cancelTime,
-      maxAppointmentTime
+      maxAppointmentTime,
+      bank,
+      bankAccount,
+      bankAgency,
+      pix
     });
     return { error: null };
   } catch (error: any) {

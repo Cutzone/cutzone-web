@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BarberServicesEntity } from "@/common/entities/barberServicesEntity";
-import { CollaboratorEntity } from "@/common/entities/collaborator";
 import firebaseApp from "@/config/firebase";
 import {
   DocumentData,
@@ -11,7 +11,6 @@ import {
   getDocs,
   getFirestore,
   query,
-  setDoc,
   updateDoc
 } from "firebase/firestore";
 

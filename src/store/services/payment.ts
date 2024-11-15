@@ -1,16 +1,5 @@
 import firebaseApp from "@/config/firebase";
-import {
-  DocumentData,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-  setDoc,
-  updateDoc
-} from "firebase/firestore";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 
 import { PlanEntity } from "@/common/entities/plan";
 

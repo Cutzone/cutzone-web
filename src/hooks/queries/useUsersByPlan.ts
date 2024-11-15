@@ -7,7 +7,6 @@ import {
 
 import { usersByPlan } from "@/store/services/user";
 import { DocumentData } from "firebase/firestore";
-import { UserEntity } from "@/common/entities/user";
 
 export function getUsersByPlanQueryKey() {
   return ["usersByPlan"];
@@ -17,6 +16,7 @@ export const getUsersByPlanQueryFn = () => {
   return () => usersByPlan();
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useUsersByPlan = <T = any>(select?: (data: DocumentData) => T) => {
   return useQuery(getUsersByPlanQueryKey(), getUsersByPlanQueryFn(), {
     select,

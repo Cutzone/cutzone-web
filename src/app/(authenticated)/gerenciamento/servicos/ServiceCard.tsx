@@ -8,6 +8,7 @@ interface ServiceCardProps {
   preco: number;
   duracao: number;
   index: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleDeleteService: any;
   categorias: string[];
   imageURL: string;

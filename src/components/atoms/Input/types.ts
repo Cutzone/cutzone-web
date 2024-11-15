@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface inputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   bgColor?: string;

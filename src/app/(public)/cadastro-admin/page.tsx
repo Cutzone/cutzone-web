@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuth from "@/hooks/useAuth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { usePathname } from "next/navigation";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 
 type signUpUserForm = z.infer<typeof signUpUserFormSchema>;
@@ -43,7 +42,6 @@ export default function CadastroPage() {
   async function handleSubmitForm(data: signUpUserForm) {
     await mutation.mutateAsync(data);
   }
-  const currentPath = usePathname();
   const [showPassword, setShowPassword] = useState(false);
 
   const hasPasswordError = errors.password?.message;

@@ -5,11 +5,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  AppleOutlined,
   CloseOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
-  FacebookOutlined,
   GoogleOutlined,
   ScissorOutlined,
   UserOutlined
@@ -39,11 +37,7 @@ const Header = ({
   isLoginOpen,
   setIsLoginOpen
 }: HeaderProps) => {
-  const {
-    loginWithGoogleUser,
-    loginWithFacebookUser,
-    loginWithInternalService
-  } = useAuth();
+  const { loginWithGoogleUser, loginWithInternalService } = useAuth();
   const router = useRouter();
   const {
     handleSubmit,

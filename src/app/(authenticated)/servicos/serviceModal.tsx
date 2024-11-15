@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { CloseOutlined } from "@ant-design/icons";
 import {
@@ -135,7 +136,10 @@ const ServiceModal = ({
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["services"]);
-        await queryClient.invalidateQueries(["appointments"]);
+        await queryClient.invalidateQueries([
+          "appointments",
+          storageGet("uid") as string
+        ]);
         setIsDialogOpen(false);
       }
     }

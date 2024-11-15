@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {
-  ONE_DAY_IN_MS,
-  FORTY_FIVE_MINUTES_IN_MS,
-  ONE_MINUTE_IN_MS
-} from "@common/constants/generic";
+import { ONE_DAY_IN_MS, ONE_MINUTE_IN_MS } from "@common/constants/generic";
 
 import { DocumentData } from "firebase/firestore";
 import { getUser } from "@/store/services/user";

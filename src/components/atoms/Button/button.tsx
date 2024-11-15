@@ -1,5 +1,4 @@
 import { twMerge } from "tailwind-merge";
-import LoadingComponent from "../Loading/loading";
 import { ButtonProps } from "./types";
 
 export default function Button({

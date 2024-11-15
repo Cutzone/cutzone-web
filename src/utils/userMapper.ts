@@ -1,5 +1,6 @@
 import { BarberShopEntity } from "@/common/entities/barberShopEntity";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const userMapper = (apiData: any): BarberShopEntity => {
   return {
     id: apiData.uid,

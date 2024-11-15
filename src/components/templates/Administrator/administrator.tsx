@@ -1,10 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FetchAuthState from "@/components/templates/FetchAuth/fetchAuth";
 import useProfile from "@/hooks/queries/useProfile";
-import useAuth from "@/hooks/useAuth";
 import { storageGet } from "@/store/services/storage";
 
 interface Props {

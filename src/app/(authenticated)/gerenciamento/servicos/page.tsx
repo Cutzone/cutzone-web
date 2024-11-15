@@ -10,10 +10,8 @@ import Button from "@/components/atoms/Button/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from "@/components/ui/dialog";
 import FormErrorLabel from "@/components/atoms/FormError/formError";
 import { createNewServiceDoc } from "@/store/services/services";
@@ -33,7 +31,7 @@ function Servicos() {
 
   const route = useRouter();
   const queryClient = useQueryClient();
-  const { data, isLoading } = useBarberShop(storageGet("uid") as string);
+  const { data } = useBarberShop(storageGet("uid") as string);
   const progress = data?.flags?.filter((flag) => flag === true).length;
 
   const mutation = useMutation(
@@ -75,7 +73,7 @@ function Servicos() {
 
   const handleSubmitServices = () => {
     for (const service of services) {
-      const res = createNewServiceDoc(service, storageGet("uid") as string);
+      createNewServiceDoc(service, storageGet("uid") as string);
     }
 
     mutation.mutateAsync();

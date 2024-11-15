@@ -7,6 +7,7 @@ export const dateToShortString = (dateMs: Timestamp): string => {
   date = new Date(date.getTime() + dateMs.nanoseconds / 1000000);
 
   // Formate a data no formato desejado
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function formatDate(d: any) {
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, "0");

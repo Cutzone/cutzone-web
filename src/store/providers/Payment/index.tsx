@@ -13,7 +13,6 @@ import {
   where
 } from "firebase/firestore";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { ProductEntity } from "@common/entities/product";
 
 import PaymentContext from "./context";
 import { storageGet } from "@/store/services/storage";
@@ -81,6 +80,7 @@ const PaymentProvider = ({ children }: Props) => {
     const auth = getAuth(app);
     const user = auth.currentUser;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let dataWithUrl: any;
     setLoading((prev) => ({ ...prev, getPortalUrl: true }));
 

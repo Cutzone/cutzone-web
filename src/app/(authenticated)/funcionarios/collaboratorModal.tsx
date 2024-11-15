@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -16,12 +16,10 @@ import Input from "@/components/atoms/Input/input";
 import Button from "@/components/atoms/Button/button";
 import {
   createNewCollaboratorDoc,
-  deleteCollaboratorDoc,
   updateCollaboratorDoc
 } from "@/store/services/collaborators";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { storageGet } from "@/store/services/storage";
-import { type } from "os";
 
 type collaboratorForm = z.infer<typeof collaboratorFormSchema>;
 
@@ -64,7 +62,7 @@ const CollaboratorModal = ({
             name: "",
             age: "" as unknown as number,
             email: "",
-            pix: "" as unknown as string,
+            pix: "" as unknown as number,
             profession: ""
           }
   });
@@ -85,7 +83,10 @@ const CollaboratorModal = ({
           "collaborators",
           storageGet("uid") as string
         ]);
-        await queryClient.invalidateQueries(["appointments"]);
+        await queryClient.invalidateQueries([
+          "appointments",
+          storageGet("uid") as string
+        ]);
         setIsDialogOpen(false);
       }
     }

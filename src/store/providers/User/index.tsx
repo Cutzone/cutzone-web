@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -21,7 +22,6 @@ const UserProvider = ({ children }: Props) => {
     getAllUsers: false
   };
   const [loading, setLoading] = useState(initialLoadingObject);
-  const [allUsers, setAllUsers] = useState<BarberShopEntity[] | null>();
   const [userObject, setUserObject] = useState<any>({} as any);
   const updateUser = async ({ id, email }: Partial<BarberShopEntity>) => {
     setLoading((prev) => ({ ...prev, updateUserDoc: true }));

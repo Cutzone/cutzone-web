@@ -1,18 +1,5 @@
-import { ImagesEntity } from "@/common/entities/images";
 import firebaseApp from "@/config/firebase";
-import {
-  DocumentData,
-  collection,
-  deleteDoc,
-  addDoc,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-  updateDoc,
-  orderBy
-} from "firebase/firestore";
+import { collection, addDoc, doc, getFirestore } from "firebase/firestore";
 
 const db = getFirestore(firebaseApp);
 const tableName = "images";
@@ -26,6 +13,7 @@ export const createNewImageDoc = async (url: string, barberShopId: string) => {
       url
     });
     return { error: null };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return { error: error.message };
   }

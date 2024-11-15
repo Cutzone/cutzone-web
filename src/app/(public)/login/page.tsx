@@ -12,7 +12,7 @@ import SignInFormSchema from "@/validations/signIn";
 type SignInForm = z.infer<typeof SignInFormSchema>;
 
 export default function LoginPage() {
-  const { loginWithGoogleUser, loginWithInternalService, loading } = useAuth();
+  const { loginWithGoogleUser, loginWithInternalService } = useAuth();
 
   const {
     handleSubmit,

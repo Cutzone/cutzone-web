@@ -23,7 +23,6 @@ import {
 import { storageGet } from "@/store/services/storage";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { User } from "lucide-react";
 
 export default function NavBar({ data }: { data: BarberShopEntity }) {
   const currentRoute = usePathname();

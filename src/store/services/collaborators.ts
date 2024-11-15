@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CollaboratorEntity } from "@/common/entities/collaborator";
 import firebaseApp from "@/config/firebase";
 import {
@@ -10,7 +11,6 @@ import {
   getDocs,
   getFirestore,
   query,
-  setDoc,
   updateDoc
 } from "firebase/firestore";
 

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,11 +14,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   updateAppointmentStatus,
   getAppointmentByClientId,
-  updateClientAppointment,
-  updateClientAppointmentStatus
+  updateClientAppointment
 } from "@/store/services/appointments";
 import { updateUserAppointmentStatus } from "@/store/services/user";
-import { isEqual } from "date-fns";
 import { increment } from "firebase/firestore";
 
 interface ModalProps {
@@ -63,7 +62,7 @@ const StatusModal = ({
     },
     {
       onSuccess: async () => {
-        await queryClient.invalidateQueries(["appointments"]);
+        await queryClient.invalidateQueries(["appointments", bsid]);
         setIsOpen(false);
       }
     }
@@ -103,7 +102,7 @@ const StatusModal = ({
     },
     {
       onSuccess: async () => {
-        await queryClient.invalidateQueries(["appointments"]);
+        await queryClient.invalidateQueries(["appointments", bsid]);
         setIsOpen(false);
       }
     }
@@ -127,7 +126,7 @@ const StatusModal = ({
     },
     {
       onSuccess: async () => {
-        await queryClient.invalidateQueries(["appointments"]);
+        await queryClient.invalidateQueries(["appointments", bsid]);
         setIsOpen(false);
       }
     }

@@ -1,7 +1,6 @@
 import email from "@/common/validation/email";
 import name from "@/common/validation/name";
 import password from "@/common/validation/password";
-import phone from "@/common/validation/phone";
 import { z } from "zod";
 
 export default z
