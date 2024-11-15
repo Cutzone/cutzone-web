@@ -8,7 +8,6 @@ import useBarberShop from "@/hooks/queries/useBarberShop";
 import { storageGet } from "@/store/services/storage";
 import { timestampToDate } from "@/utils/timestampToDate";
 import { CheckOutlined } from "@ant-design/icons";
-import { Progress } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";

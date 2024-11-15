@@ -1,17 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppoitmentCompanyEntity } from "@/common/entities/appointmentCompany";
 import { CollaboratorEntity } from "@/common/entities/collaborator";
 import firebaseApp from "@/config/firebase";
 import {
   DocumentData,
-  addDoc,
   collection,
-  deleteDoc,
   doc,
-  getDoc,
   getDocs,
   getFirestore,
   query,
-  setDoc,
   updateDoc,
   where
 } from "firebase/firestore";
@@ -21,10 +18,8 @@ import { getUser } from "./user";
 import { BarberServicesEntity } from "@/common/entities/barberServicesEntity";
 import { getUserDoc } from "./barberShop";
 import { BarberShopEntity } from "@/common/entities/barberShopEntity";
-import { ca } from "date-fns/locale";
 import { isAfter, isBefore, isEqual, isSameDay } from "date-fns";
 import { timestampToDate } from "@/utils/timestampToDate";
-import { Timestamp } from "@/common/entities/timestamp";
 import { timestampToTime } from "@/utils/timestampToTime";
 
 const db = getFirestore(firebaseApp);
@@ -232,7 +227,6 @@ function isTimeBetween(
 
 export const cancelAppointmentsBarbershop = async ({
   bsid,
-  collaboratorId,
   type,
   startDate,
   endDate,

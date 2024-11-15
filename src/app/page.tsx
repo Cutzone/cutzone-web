@@ -1,64 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import barberShopPic from "../public/barber-shop.jpg";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
-import Input from "@/components/atoms/Input/input";
 import Button from "@/components/atoms/Button/button";
-import { Separator } from "@/components/ui/separator";
-import {
-  AppleOutlined,
-  CheckOutlined,
-  CloseOutlined,
-  FacebookOutlined,
-  GoogleOutlined,
-  ScissorOutlined,
-  UserOutlined
-} from "@ant-design/icons";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import SignInFormSchema from "@/validations/signIn";
-import { zodResolver } from "@hookform/resolvers/zod";
-import useAuth from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
+import { CheckOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import Header from "@/components/molecules/Header";
 import Footer from "@/components/molecules/Footer";
 
-type SignInForm = z.infer<typeof SignInFormSchema>;
-
 export default function Home() {
-  const {
-    loginWithGoogleUser,
-    loginWithFacebookUser,
-    loginWithInternalService,
-    loading
-  } = useAuth();
-  const {
-    handleSubmit,
-    register,
-    formState: { errors }
-  } = useForm<SignInForm>({
-    mode: "all",
-    criteriaMode: "all",
-    resolver: zodResolver(SignInFormSchema)
-  });
-  const router = useRouter();
-
   const [isSingUpOpen, setIsSingUpOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-
-  const handleSubmitForm = (data: SignInForm) => {
-    loginWithInternalService(data.email, data.password);
-  };
 
   const HowItWorks = () => {
     return (

@@ -5,7 +5,6 @@ import {
   FORTY_FIVE_MINUTES_IN_MS
 } from "@common/constants/generic";
 
-import type { BarberShopEntity } from "@/common/entities/barberShopEntity";
 import { getAllUsers } from "@/store/services/user";
 import { DocumentData } from "firebase/firestore";
 import { UserEntity } from "@/common/entities/user";

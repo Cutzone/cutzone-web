@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import firebaseApp from "@/config/firebase";
 import {
   DocumentData,

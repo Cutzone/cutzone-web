@@ -9,7 +9,6 @@ export default function Input({
   textColor,
   label,
   placeholder,
-  onChange,
   onBlur,
   value,
   disabled = false,

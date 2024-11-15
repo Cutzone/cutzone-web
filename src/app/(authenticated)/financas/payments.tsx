@@ -27,10 +27,11 @@ const generatePeriodOptions = () => {
 
 interface PaymentsProps {
   appointments: AppoitmentCompanyEntity[];
+  barbserShopId?: string;
 }
 
-const Payments = ({ appointments }: PaymentsProps) => {
-  const [selectedPeriod, setSelectedPeriod] = useState("Útimo ano");
+const Payments = ({ appointments, barbserShopId }: PaymentsProps) => {
+  const [selectedPeriod, setSelectedPeriod] = useState("Último ano");
   const [isCustomSelected, setIsCustomSelected] = useState(false);
   const today = new Date();
 
@@ -43,7 +44,9 @@ const Payments = ({ appointments }: PaymentsProps) => {
   const [filteredAppointments, setFilteredAppointments] =
     useState<AppoitmentCompanyEntity[]>(appointments);
 
-  const { data: barbershop } = useBarberShop(storageGet("uid") as string);
+  const { data: barbershop } = useBarberShop(
+    barbserShopId || (storageGet("uid") as string)
+  );
 
   function filterLastWeekAppointments() {
     const now = new Date();
@@ -84,7 +87,6 @@ const Payments = ({ appointments }: PaymentsProps) => {
     );
   }
 
-  console.log(appointments);
   function filterLastYearAppointments() {
     return appointments.filter((appointment) =>
       isWithinInterval(timestampToDate(appointment.startTime as Timestamp), {
@@ -132,20 +134,17 @@ const Payments = ({ appointments }: PaymentsProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPeriod, appointments]);
 
+  console.log(filteredAppointments);
   function calculatePayments(type: "corte" | "barba" | "sobrancelha") {
     if (!barbershop) return 0;
 
     const value = servicesValues[barbershop.tier as string][type];
-
-    console.log(value);
 
     let total = 0;
 
     const filteredByCategory = filteredAppointments.filter(
       (appointment) => appointment.service?.category[0] === type
     );
-
-    console.log(filteredAppointments);
 
     filteredByCategory.forEach(() => {
       total += value * 0.7;
@@ -178,6 +177,8 @@ const Payments = ({ appointments }: PaymentsProps) => {
         calculatePayments("sobrancelha")
     }
   ];
+
+  console.log(selectedPeriod);
 
   return (
     <div>

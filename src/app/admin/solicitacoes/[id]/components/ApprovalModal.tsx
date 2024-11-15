@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from "@/components/atoms/Button/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -34,8 +34,7 @@ const ApprovalModal = ({
 }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const [tierValue, setTierValue] = useState<string>("BASIC");
-  const [checkboxValue, setCheckboxValue] = useState<string>("");
+  const [tierValue, setTierValue] = useState<string>("STANDARD");
 
   const mutation = useMutation(
     async () => {

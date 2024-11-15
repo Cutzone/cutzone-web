@@ -1,8 +1,6 @@
 "use client";
 
 import useAllColaborators from "@/hooks/queries/useAllColaborators";
-import { StarFilled } from "@ant-design/icons";
-import Image from "next/image";
 import CollaboratorCard from "./collaboratorCard";
 import Title from "@/components/atoms/Title";
 import useBarberShop from "@/hooks/queries/useBarberShop";

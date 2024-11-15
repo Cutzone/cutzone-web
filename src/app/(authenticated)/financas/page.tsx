@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Separator } from "@/components/ui/separator";
 import InfoCard from "./InfoCard";
 import { DataTable } from "@/components/ui/dataTable";
 import { columns } from "./columns";
-import { pending } from "./pending";
 import { Progress, ConfigProvider } from "antd";
 import Image from "next/image";
 import useBarberShop from "@/hooks/queries/useBarberShop";
@@ -31,8 +31,6 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import FilterButton from "@/components/atoms/FilterButton";
-import { AppoitmentCompanyEntity } from "@/common/entities/appointmentCompany";
-import useAllConfigs from "@/hooks/queries/useAllConfigs";
 import Payments from "./payments";
 
 function Financas() {
@@ -51,9 +49,6 @@ function Financas() {
     "novembro",
     "dezembro"
   ];
-  const { data: barbershop } = useBarberShop(storageGet("uid") as string);
-  const { data: configs } = useAllConfigs();
-
   const [tableFilter, setTableFilter] = useState("all");
   const [viewType, setViewType] = useState("year");
   const [selectedMonth, setSelectedMonth] = useState(
@@ -242,56 +237,6 @@ function Financas() {
     }
   ];
 
-  const pendingData = appointments?.filter(
-    (item) => item.status === "scheduled"
-  );
-
-  const getCategorySums = (appointments: AppoitmentCompanyEntity[]) => {
-    const categorySums: { [key: string]: number } = {};
-
-    appointments.forEach((appointment) => {
-      const categories = appointment.service?.category;
-
-      if (categories) {
-        categories.forEach((category) => {
-          if (!categorySums[category]) {
-            categorySums[category] = 0;
-          }
-          categorySums[category]++;
-        });
-      }
-    });
-
-    if (configs && barbershop) {
-      configs.forEach((config) => {
-        if (barbershop.tier?.toString() === config.id) {
-          for (const [key] of Object.entries(categorySums)) {
-            switch (key) {
-              case "barba":
-                categorySums[key] *= config.barba;
-                break;
-              case "corte":
-                categorySums[key] *= config.corte;
-                break;
-              case "sobrancelha":
-                categorySums[key] *= config.sobrancelha;
-                break;
-            }
-          }
-        }
-      });
-    }
-
-    return categorySums;
-  };
-
-  const filteredPending = Object.entries(
-    pendingData ? getCategorySums(pendingData) : [[], {}]
-  ).map(([category, value]) => ({
-    category,
-    value
-  }));
-
   const filteredData =
     viewType === "year"
       ? currYearAppointments?.filter((item) => {
@@ -342,24 +287,14 @@ function Financas() {
   const services = useMemo(() => {
     const serviceCounts: { [key: string]: number } = {};
 
-    const currentDate = new Date();
-
     viewType === "year"
       ? currYearAppointments?.forEach((appointment) => {
-          const appointmentDate = timestampToDate(
-            appointment.startTime as Timestamp
-          );
-
           const serviceName = appointment.service?.name;
           if (serviceName) {
             serviceCounts[serviceName] = (serviceCounts[serviceName] || 0) + 1;
           }
         })
       : currMonthAppointments?.forEach((appointment) => {
-          const appointmentDate = timestampToDate(
-            appointment.startTime as Timestamp
-          );
-
           const serviceName = appointment.service?.name;
           if (serviceName) {
             serviceCounts[serviceName] = (serviceCounts[serviceName] || 0) + 1;

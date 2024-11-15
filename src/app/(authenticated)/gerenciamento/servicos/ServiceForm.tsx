@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Separator } from "@/components/ui/separator";
 import barberServicesFormSchema from "@/validations/barberServices";
 import { z } from "zod";
@@ -55,9 +56,7 @@ function ServiceForm({
   const {
     handleSubmit,
     register,
-    formState: { errors },
-    setValue,
-    getValues
+    formState: { errors }
   } = useForm<barberServicesForm>({
     mode: "all",
     criteriaMode: "all",

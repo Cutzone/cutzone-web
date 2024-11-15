@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BarberServicesEntity } from "./barberServicesEntity";
 import { BarberShopEntity } from "./barberShopEntity";
 import { CollaboratorEntity } from "./collaborator";

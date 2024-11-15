@@ -1,11 +1,9 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import FetchAuthState from "@templates/FetchAuth/fetchAuth";
 import useAuth from "@/hooks/useAuth";
-import LoadingComponent from "@atoms/Loading/loading";
-import useProfile from "@/hooks/queries/useProfile";
 import { storageGet } from "@/store/services/storage";
 
 interface Props {
@@ -14,9 +12,7 @@ interface Props {
 
 function AuthenticatedOnlyFeature({ children }: Props): JSX.Element {
   const { userUid } = useAuth();
-  const { data: user, isFetching } = useProfile(
-    userUid !== "" ? userUid : storageGet("uid") || ""
-  );
+
   const router = useRouter();
 
   useEffect(() => {

@@ -1,24 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlocekdDateEntity } from "@/common/entities/blockedDate";
-import { CollaboratorEntity } from "@/common/entities/collaborator";
 import firebaseApp from "@/config/firebase";
 import {
-  DocumentData,
   addDoc,
   collection,
   deleteDoc,
   doc,
-  getDoc,
   getDocs,
   getFirestore,
-  query,
-  setDoc,
-  updateDoc
+  query
 } from "firebase/firestore";
 import {
   cancelAppointmentsBarbershop,
   cancelAppointmentsCollaborators
 } from "./appointments";
-import { Timestamp } from "@/common/entities/timestamp";
 
 const db = getFirestore(firebaseApp);
 const tableName = "blockedDates";

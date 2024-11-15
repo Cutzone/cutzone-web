@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BarberShopEntity } from "@/common/entities/barberShopEntity";
 
 export interface UserContextType {

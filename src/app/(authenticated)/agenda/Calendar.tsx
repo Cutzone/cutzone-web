@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Calendar, View, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/pt-br";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "@common/styles/rbcStylesOverride.css";
-import { myEventsList } from "./constants";
 import { useCallback } from "react";
 
 moment.locale("pt-br");
 const localizer = momentLocalizer(moment);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CustomEvent = ({ event }: any) => (
   <div>
     <strong className="text-sm">
@@ -18,7 +19,7 @@ const CustomEvent = ({ event }: any) => (
   </div>
 );
 
-const eventStyleGetter = ({ event, start, end, isSelected }: any) => {
+const eventStyleGetter = () => {
   const backgroundColor = "#B7864B";
   const style = {
     backgroundColor,

@@ -7,38 +7,23 @@ import useBarberShop from "@/hooks/queries/useBarberShop";
 import { storageGet } from "@/store/services/storage";
 import { BarberShopEntity } from "@/common/entities/barberShopEntity";
 import { LogoutOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import ResponsiveNavbar from "@/containers/ResponsiveNavbar/ResponsiveNavbar";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from "@/components/ui/dialog";
 import useProfile from "@/hooks/queries/useProfile";
 import { useQueryClient } from "@tanstack/react-query";
-
-const authMenuItems = [
-  {
-    label: "Home",
-    href: "/home"
-  },
-  {
-    label: "Profile",
-    href: "/profile"
-  }
-];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { logoutUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const queryClient = useQueryClient();
-  const { data: barber, isLoading } = useBarberShop(
-    storageGet("uid") as string
-  );
+  const { data: barber } = useBarberShop(storageGet("uid") as string);
   const { data: user } = useProfile(storageGet("uid") as string);
 
   return (
@@ -93,7 +78,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               data={(barber as BarberShopEntity) || user}
             />
           </header>
-          <main className="p-5 md:p-10">{children}</main>
+          <Suspense>
+            <main className="p-5 md:p-10">{children}</main>
+          </Suspense>
         </div>
       </>
     </AuthenticatedOnlyFeature>

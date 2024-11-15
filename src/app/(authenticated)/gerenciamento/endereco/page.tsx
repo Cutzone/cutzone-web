@@ -26,8 +26,9 @@ export default function Endereco() {
   const [checked, setChecked] = useState(false);
   const queryClient = useQueryClient();
   const { data: barberShopData } = useBarberShop(storageGet("uid") as string);
-  const progress = barberShopData?.flags?.filter((flag) => flag === true)
-    .length;
+  const progress = barberShopData?.flags?.filter(
+    (flag) => flag === true
+  ).length;
 
   const fetchAddressByCEP = async (cep: string) => {
     const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);

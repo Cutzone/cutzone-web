@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { columns } from "./columns";
 import useAllPlataformAppointments from "@/hooks/queries/useAllPlataformAppointments";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import useAllBarberShops from "@/hooks/queries/useAllBarberShops";
 import FilterButton from "@/components/atoms/FilterButton";
 

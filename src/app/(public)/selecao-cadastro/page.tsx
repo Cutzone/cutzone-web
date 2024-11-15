@@ -12,18 +12,15 @@ import {
 } from "@ant-design/icons";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { set } from "date-fns";
 import Input from "@/components/atoms/Input/input";
 import signUpGoogleFormSchema from "@/validations/signUpGoogle";
 import { zodResolver } from "@hookform/resolvers/zod";

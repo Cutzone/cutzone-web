@@ -20,7 +20,6 @@ import {
 } from "@/store/services/auth";
 import {
   createNewUserDoc,
-  createNewUserDocGoogle,
   deleteUserDoc,
   getUserDoc
 } from "@/store/services/barberShop";
@@ -106,7 +105,7 @@ const AuthProvider = ({ children }: Props) => {
 
   const loginWithFacebookUser = async () => {
     setLoading((prev) => ({ ...prev, loginWithFacebook: true }));
-    const { user, error } = await loginWithFacebook();
+    const { user } = await loginWithFacebook();
 
     const barberShop = await getUserDoc(user?.uid || "");
     const userDoc = await getUser(user?.uid || "");
@@ -230,7 +229,7 @@ const AuthProvider = ({ children }: Props) => {
         }));
         return;
       }
-      const res = await createNewUserDoc({
+      await createNewUserDoc({
         id: user?.uid || "",
         owner,
         rg,

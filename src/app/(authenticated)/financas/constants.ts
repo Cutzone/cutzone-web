@@ -12,6 +12,6 @@ export const servicesValues: Record<string, Record<string, number>> = {
   PREMIUM: {
     corte: 50,
     barba: 25,
-    sobrancelha: 12
+    sobrancelha: 12.5
   }
 };

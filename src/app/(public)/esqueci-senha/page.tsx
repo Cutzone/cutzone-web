@@ -2,9 +2,7 @@
 
 import useAuth from "@hooks/useAuth";
 import Button from "@atoms/Button/button";
-import FormErrorLabel from "@atoms/FormError/formError";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import forgotPasswordFormSchema from "@/validations/forgotPassword";
@@ -13,7 +11,7 @@ import Input from "@/components/atoms/Input/input";
 type ForgotPasswordForm = z.infer<typeof forgotPasswordFormSchema>;
 
 export default function ForgotPassword() {
-  const { forgotPassword, loading } = useAuth();
+  const { forgotPassword } = useAuth();
 
   const {
     handleSubmit,

@@ -6,11 +6,12 @@ import CollaboratorCard from "../../solicitacoes/[id]/components/CollaboratorCar
 import ServiceCard from "../../solicitacoes/[id]/components/ServiceCard";
 import useAllServices from "@/hooks/queries/useAllServices";
 import useAllColaborators from "@/hooks/queries/useAllColaborators";
-import { useState } from "react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { timestampToDate } from "@/utils/timestampToDate";
 import { Timestamp } from "@/common/entities/timestamp";
+import Payments from "@/app/(authenticated)/financas/payments";
+import useAllAppointments from "@/hooks/queries/useAllAppointments";
 
 const weekDays = [
   "Segunda",
@@ -38,20 +39,10 @@ const BarbeariaPage = () => {
   const { data: services } = useAllServices(id as string);
   const { data: collaborators } = useAllColaborators(id as string);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenRejection, setIsOpenRejection] = useState(false);
+  const { data: appointments, isLoading: isLoadingAppointments } =
+    useAllAppointments(id as string);
 
-  console.log(barberShop);
-
-  const handleAprove = async () => {
-    setIsOpen(true);
-  };
-
-  const handleReject = () => {
-    setIsOpenRejection(true);
-  };
-
-  if (isLoading) {
+  if (isLoading || isLoadingAppointments) {
     return <div>Carregando...</div>;
   }
 
@@ -192,6 +183,17 @@ const BarbeariaPage = () => {
           })}
         </div>
       </div>
+
+      <Payments
+        appointments={
+          appointments?.filter(
+            (appointment) =>
+              appointment.status === "concluded" ||
+              appointment.status === "didNotShow"
+          ) || []
+        }
+        barbserShopId={id as string}
+      />
     </div>
   );
 };
