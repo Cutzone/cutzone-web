@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Cutzone",
-  description: "Plataforma cutzone"
+  description: "Plataforma Cutzone"
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html translate="no">
       <QueryClientProviderApp>
         <UserProvider>
           <AuthProvider>
