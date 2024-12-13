@@ -3,7 +3,6 @@ import { Timestamp } from "@/common/entities/timestamp";
 import SortButton from "@/components/atoms/SortButton";
 import { timestampToDate } from "@/utils/timestampToDate";
 import { ColumnDef } from "@tanstack/react-table";
-import { ptBR } from "date-fns/locale";
 
 // export const appointments = [
 //   {
