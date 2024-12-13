@@ -132,7 +132,7 @@ export const columns: ColumnDef<BarberShopEntity>[] = [
         row.original.createdAt as unknown as Timestamp
       );
 
-      return <p>{date.toLocaleDateString()}</p>;
+      return <p>{date.toLocaleDateString("pt-BR")}</p>;
     }
   },
   {

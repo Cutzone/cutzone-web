@@ -70,9 +70,9 @@ const SolicitacoesPage = () => {
       <Separator className="mb-6 mt-4 bg-black" />
       <p className="mb-4 text-sm font-light">
         Solicitação criada em:{" "}
-        {timestampToDate(
-          barberShop?.createdAt as Timestamp
-        ).toLocaleDateString()}
+        {timestampToDate(barberShop?.createdAt as Timestamp).toLocaleDateString(
+          "pt-BR"
+        )}
       </p>
       <div className="mb-6 flex flex-col gap-2">
         <h2 className="text-lg font-bold">Informações básicas</h2>

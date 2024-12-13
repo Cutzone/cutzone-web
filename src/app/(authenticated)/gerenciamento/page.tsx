@@ -246,7 +246,7 @@ export default function Gerenciamento() {
             <p>
               {timestampToDate(
                 data?.rejectedAt as Timestamp
-              ).toLocaleDateString()}
+              ).toLocaleDateString("pt-BR")}
             </p>
           </div>
         </div>

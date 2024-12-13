@@ -107,7 +107,7 @@ const Toolbar = ({
         </DropdownMenu>
 
         <div className="hidden md:block">
-          {view === "day" && <p>{date.toLocaleDateString()}</p>}
+          {view === "day" && <p>{date.toLocaleDateString("pt-BR")}</p>}
           {view === "week" && (
             <p>
               {`${format(
@@ -192,7 +192,7 @@ const Toolbar = ({
       </div>
 
       <div className="my-4 flex justify-center md:hidden">
-        {view === "day" && <p>{date.toLocaleDateString()}</p>}
+        {view === "day" && <p>{date.toLocaleDateString("pt-BR")}</p>}
         {view === "week" && (
           <p>
             {`${format(
