@@ -1,5 +1,6 @@
 import { AppoitmentCompanyEntity } from "@/common/entities/appointmentCompany";
 import { Timestamp } from "@/common/entities/timestamp";
+import SortButton from "@/components/atoms/SortButton";
 import { timestampToDate } from "@/utils/timestampToDate";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -100,28 +101,30 @@ import { ColumnDef } from "@tanstack/react-table";
 export const columns: ColumnDef<AppoitmentCompanyEntity>[] = [
   {
     accessorKey: "service",
-    header: "Serviço",
+    header: ({ column }) => <SortButton column={column}>Serviço</SortButton>,
     cell: ({ row }) => {
       return <p>{row.original.service?.name}</p>;
     }
   },
   {
     accessorKey: "employee",
-    header: "Funcionário",
+    header: ({ column }) => (
+      <SortButton column={column}>Funcionário</SortButton>
+    ),
     cell: ({ row }) => {
       return <p>{row.original.employee?.name}</p>;
     }
   },
   {
     accessorKey: "client",
-    header: "Cliente",
+    header: ({ column }) => <SortButton column={column}>Cliente</SortButton>,
     cell: ({ row }) => {
       return <p>{row.original.client?.name}</p>;
     }
   },
   {
     accessorKey: "startTime",
-    header: "Data",
+    header: ({ column }) => <SortButton column={column}>Data</SortButton>,
     cell: ({ row }) => {
       const date = timestampToDate(row.original.startTime as Timestamp);
 
@@ -130,7 +133,7 @@ export const columns: ColumnDef<AppoitmentCompanyEntity>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => <SortButton column={column}>Status</SortButton>,
     cell: ({ row }) => {
       const status = row.original.status;
 
